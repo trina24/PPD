@@ -1,26 +1,36 @@
 -- Zad. 1 zbiór potęgowy
+
 powerlist :: [a] -> [[a]]
 powerlist [] = [[]]
 powerlist (x:xs) = powerlist xs ++ map (x:) (powerlist xs)
+
 -- Zad. 2 podzbiór
+
 ifsubset :: Eq a => [a] -> [a] -> Bool
 ifsubset [] y = True
 ifsubset (x:xs) y | elem x y == True = ifsubset xs y
                   | otherwise = False
+
 -- Zad. 3 iloczyn
+
 intersection :: Eq a => [a] -> [a] -> [a]
 intersection [] y = []
 intersection (x:xs) y | elem x y == True = [x] ++ intersection xs y
                       | otherwise = intersection xs y
+
 -- Zad. 4 suma
+
 union :: Eq a => [a] -> [a] -> [a]
 union [] y = y
 union (x:xs) y | elem x y == True = union xs y
                | otherwise = [x] ++ union xs y
+
 -- Zad. 5 a)
+
 -- 6 / (12 / (24 / (8 / 2))) = 6 / (12 / (24 / 4)) = 6 / (12 / 6) = 6 / 2 = 3
 
 -- Zad. 5 b)
+
 -- 1>2 && (3>2 && (5==5 && True)) = 1>2 && (3>2 && True) = 1>2 && True = False
 
 -- Zad. 5 c)
@@ -45,8 +55,42 @@ union (x:xs) y | elem x y == True = union xs y
 
 -- Zad. 5 h)
 
--- 2*8 + 1 = 17
--- 2*17 + 2 = 36
--- 2*36 + 3 =75
+-- 2 * (2 * (2 * 8 + 1) + 2) + 3 = 2 * (2 * 17 + 2) + 3 = 2 * 36 + 3 = 75
 
 -- Zad. 6 elem przy pomocy foldl
+
+foldelem :: Eq a => a -> [a] -> Bool
+foldelem x = foldl (\q y -> q || (x == y)) False
+
+-- Zad. 7 a)
+
+foldlmap f xs = foldl (\ys x -> ys ++ [f x]) [] xs
+
+-- Zad. 7 b) map przy pomocy foldr
+
+foldrmap f xs = foldr (\x ys -> (f x):ys) [] xs
+
+-- Zad. 8 a) last za pomocą fold1
+
+foldlast :: [a] -> a
+foldlast = foldl1 (\x y -> y)
+
+-- Zad. 8 b) head za pomocą fold1
+
+foldhead :: [a] -> a
+foldhead = foldr1 (\x y -> x)
+
+-- Zad. 8 c) maksimum za pomocą fold1
+
+foldmax :: Ord a => [a] -> a
+foldmax = foldr1 (\x y -> max x y)
+
+-- Zad.9 zip i unzip
+
+zip' :: [a] -> [b] -> [(a,b)]
+zip' [] y = []
+zip' x [] = []
+zip' (x:xs) (y:ys) = [(x,y)] ++ zip' xs ys
+
+unzip' :: [(a,b)] -> ([a],[b])
+unzip' x = (map fst x, map snd x)
