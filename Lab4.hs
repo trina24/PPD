@@ -94,3 +94,23 @@ zip' (x:xs) (y:ys) = [(x,y)] ++ zip' xs ys
 
 unzip' :: [(a,b)] -> ([a],[b])
 unzip' x = (map fst x, map snd x)
+
+-- Zad.10 a) średnia arytmetyczna dwóch liczb
+
+arimean = \x y -> (x + y) / 2
+
+-- Zad.10 b) średnia geometryczna dwóch liczb
+
+geomean = \x y -> sqrt (x * y)
+
+-- Zad. 10 c) średnia harmoniczna dwóch liczb
+
+harmean = \x y -> 2 / (1 / x + 1 / y)
+
+-- Zad. 10 d) objętość stożka
+
+conevol = \r h -> pi * r * r * h / 3
+
+-- Zad. 10 e) pole trapezu
+
+traparea = \a b h -> (a + b) * h / 2
